@@ -154,41 +154,43 @@ public class Cryptogram
 	public static void decrypt(String message)
 	{
 
+		int length = 0;
+		Scanner counter = new Scanner(message).useDelimiter(" ");
+		while (counter.hasNext())
+		{
+			counter.next();
+			length++;
+		}
+
+		counter.close();
+
 		int[][] key_matrix = {{2,-1},
 		                      {-1,1}};	
 		// matrix used for decryption; the inverse of the encryption
 		// matrix
 
-		int[][] message_matrix = new int[message.length()/2 + 1][2];
+		int[][] message_matrix = new int[length/2 + 1][2];
 		// THE ERROR IS HERE: the length of the matrix is decided based
 		// on each individual character in the string; if something like
 		// "H" is represented in the encrypted matrix as 173, that's
 		// already 3 times longer than it should be
 
 
-		
-		// by rules of matrix multiplication, the message has to be
-		// divided into 1xN matrices, where N = the number of rows
-		// in the key matrix (N = key_matrix.length)
-		// Empty spaces are left as zeroes, which won't affect the
-		// encrypting process
-
 		Scanner parser = new Scanner(message);
 
 		for (int i = 0; i < message_matrix.length; i++)
 		{
-			for (int j = 0; j < 2; j++)
+			for (int j = 0; j < 2 && parser.hasNext(); j++)
 			{
 				message_matrix[i][j] = parser.nextInt();
 			}
-				
+			
 			message_matrix[i] = multiply(key_matrix, message_matrix[i]);	
 			// as soon as one of the 1xN matrices is populated 
 			// inside the message matrix, encrypt it
 
 
 		}	
-		System.out.println("Check1");
 		parser.close();	
 
 		for (int i = 0; i < message_matrix.length; i++)
@@ -196,10 +198,8 @@ public class Cryptogram
 			for (int j = 0; j < 2; j++)
 			{
 				System.out.print((char) message_matrix[i][j]);
-				System.out.print(" ");	
 			}
 
-			System.out.print(" ");
 		}
 
 		System.out.println();
