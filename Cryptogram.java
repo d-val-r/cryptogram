@@ -114,13 +114,17 @@ public class Cryptogram
 		int iterator = 0;	
 		int[][] key_matrix = {{1,1},
 		                      {1,2}};	
-		// matrix used for encryption
+		// matrix used for encryption -- intentionally simple, for
+		// demonstration purposes
 
 		int[][] message_matrix = new int[message.length()/2 + 1][2];
 		// by rules of matrix multiplication, the message has to be
 		// divided into 1xN matrices, where N = the number of rows/columns
-		// in the key matrix (N = key_matrix.length = key_matrix[i].length)
-		// Empty spaces are left as zeroes, which won't affect the
+		// in the key matrix; in this case, N = 2, so we have an array of 
+		// 1x2 matrices; the length of this array is the original message
+		// divided by 2 (to account for each element being 2 values in
+		// the message), plus 1, to account for an uneven number of characters;
+		// empty spaces are left as zeroes, which won't affect the
 		// encrypting process
 
 
@@ -175,11 +179,6 @@ public class Cryptogram
 		// matrix
 
 		int[][] message_matrix = new int[length/2 + 1][2];
-		// THE ERROR IS HERE: the length of the matrix is decided based
-		// on each individual character in the string; if something like
-		// "H" is represented in the encrypted matrix as 173, that's
-		// already 3 times longer than it should be
-
 
 		Scanner parser = new Scanner(message);
 
