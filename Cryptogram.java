@@ -23,8 +23,6 @@ public class Cryptogram
 	{
 		String message;
 
-		for (int i = 0; i < args.length; i++)
-			System.out.println(args[i]);
 
 		if (args.length == 0)
 			System.out.println("invalid arguments: type -h or --help for help");
@@ -115,8 +113,8 @@ public class Cryptogram
 
 		int[][] message_matrix = new int[message.length()/2 + 1][2];
 		// by rules of matrix multiplication, the message has to be
-		// divided into 1xN matrices, where N = the number of rows
-		// in the key matrix (N = key_matrix.length)
+		// divided into 1xN matrices, where N = the number of rows/columns
+		// in the key matrix (N = key_matrix.length = key_matrix[i].length)
 		// Empty spaces are left as zeroes, which won't affect the
 		// encrypting process
 
