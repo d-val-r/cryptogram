@@ -23,15 +23,14 @@ public class Cryptogram
 	{
 		String message;
 
-
 		if (args.length == 0)
 			System.out.println("invalid arguments: type -h or --help for help");
 		else if (args[0].equals("-h") || args[0].equals("--help"))
 		{
 			System.out.println("usage: <optional filename> <args>");
 			System.out.println("-h or --help: this help page");
-			System.out.println("-e: encrypts either the file or allows user to input message");
-			System.out.println("-d: decrypts either the file or allows user to input message");
+			System.out.println("-e: encrypts either the file or allows user to input a message");
+			System.out.println("-d: decrypts either the file or allows user to input a message");
 		}
 		else if (args[0].length() > 2)
 		{
@@ -51,6 +50,12 @@ public class Cryptogram
 			System.out.print("Enter a message: ");
 			message = c.nextLine();
 			c.close();
+			if (args[0].equals("-e"))
+				encrypt(message);
+			else if(args[0].equals("-d"))
+				decrypt(message);
+			else
+				System.out.println("invalid arguments: type -h or --help for help");
 		}
 		
 	
